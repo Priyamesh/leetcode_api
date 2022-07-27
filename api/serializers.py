@@ -5,6 +5,9 @@ from .models import *
 
 
 class QuesSerializers(serializers.ModelSerializer):
+    date_solved = serializers.DateTimeField(format="%d-%b-%y")
+    date_revised = serializers.DateTimeField(format="%d-%b-%y")
+
     class Meta:
         model = Questions
         fields = "__all__"

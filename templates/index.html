@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container my-4">
+        <div class="row">
+            <img src="https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg"
+                alt="leetcode_logo" height="40vh">
+        </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add Question
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Question</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form class="row g-3" id="form-wrapper">
+                            <div class="col-md-6">
+                                <label for="inputEmail4" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword4" class="form-label">Link</label>
+                                <input type="url" class="form-control" id="queslink">
+                            </div>
+                            <div class="col-12">
+                                <label for="inputAddress" class="form-label">Description</label>
+                                <input type="text" class="form-control" id="description"
+                                    placeholder="how you solved this problem">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputCity" class="form-label">Tag</label>
+                                <input type="text" class="form-control" id="questag">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label">Difficulty</label>
+                                <select id="difficulty" class="form-select">
+                                    <option selected>Choose...</option>
+                                    <option value="EASY">EASY</option>
+                                    <option value="MEDIUM">MEDIUM</option>
+                                    <option value="HARD">HARD</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="inputAddress2" class="form-label">Note</label>
+                                <input type="text" class="form-control" id="note" placeholder="any comments ?">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary w-100" id="addbtn"
+                                    data-bs-dismiss="modal">Add</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="table-wrapper w-100 overflow-auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">S.NO</th>
+                    <th scope="col" class="w-25 text-center">Name</th>
+                    <th scope="col" class="text-center">Link</th>
+                    <th scope="col" class="text-center">Difficulty</th>
+                    <th scope="col" class="text-center">Description</th>
+                    <th scope="col" class="text-center">Solved On</th>
+                    <th scope="col" class="text-center">Revised On</th>
+                    <th scope="col" class="text-center">Revision Count</th>
+                    <th scope="col" class="text-center">Note</th>
+
+                </tr>
+            </thead>
+            <tbody id="tbody" class="text-justify">
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        function buildlist() {
+            var tbody = document.getElementById('tbody');
+            console.log(tbody);
+            var res = ``;
+
+            var url = `http://127.0.0.1:8000/api/ques`;
+            fetch(url)
+                .then(res => res.json())
+                .then(resdata => {
+                    console.log(resdata);
+                    for (var i = 0; i < resdata.length; i++) {
+                        var temp = `<tr>
+                                <th scope="row">${i + 1}</th>
+                                <td>${resdata[i].name}</td>
+                                <td><a href="${resdata[i].link}" target="_blank" >${resdata[i].link}</a></td>
+                                <td>${resdata[i].difficulty}</td>
+                                <td>${resdata[i].description}</td>
+                                <td>${resdata[i].date_solved}</td>
+                                <td>${resdata[i].date_revised}</td>
+                                <td >${resdata[i].revision_count}</td >
+                                <td >${resdata[i].note}</td >
+                                </tr >`
+
+                        res += temp;
+                    }
+                    tbody.innerHTML = res;
+                })
+        }
+        buildlist();
+
+        function addquestion(e) {
+            e.preventDefault();
+
+            var bodydata = {
+                'name': document.getElementById('name').value,
+                'link': document.getElementById('queslink').value,
+                'description': document.getElementById('description').value,
+                'tag': document.getElementById('questag').value,
+                'difficulty': document.getElementById('difficulty').value,
+                'note': document.getElementById('note').value,
+            }
+            var data = {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify(bodydata)
+            }
+            // console.log(JSON.stringify(bodydata));
+
+            var url = `http://127.0.0.1:8000/api/create`
+            fetch(url, data)
+                .then(res => {
+                    // document.getElementById('form-wrapper').reset();
+                    buildlist();
+                    console.log(res)
+                });
+
+        }
+
+
+        var form = document.getElementById('form-wrapper');
+        form.addEventListener('submit', addquestion)
+
+    </script>
+</body>
+
+</html>

@@ -8,9 +8,18 @@ from .models import *
 # Create your views here.
 
 
+def home(request):
+    return render(request, "index.html", {})
+
+
 @api_view(["GET"])
-def api_list(request):
-    api_urls = {"ye pe ye": "yeeee"}
+def api_endpoints(request):
+    api_urls = {
+        "api/": "api endpoints",
+        "api/ques": "list of all questions",
+        "api/ques/<pk>": "deatils abot the ques",
+        "api/create": "create a ques entry",
+    }
     return Response(api_urls)
 
 
@@ -35,3 +44,19 @@ def quesCreate(request):
         serializer.save()
 
     return Response(serializer.data)
+
+
+@api_view(["POST"])
+def quesUpdate(request, pk):
+    ques = Questions.objects.get(id=pk)
+    print(ques.revision_count)
+    serializer = QuesSerializers(instance=ques, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+
+def addquespage(request):
+    print("xfdxgfxtfyugug")
+    return render(request, "addques.html", {})
