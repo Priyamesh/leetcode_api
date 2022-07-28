@@ -39,8 +39,12 @@ def quesDetail(request, pk):
 
 @api_view(["POST"])
 def quesCreate(request):
+    print(request.data)
+    print("entered in create view")
     serializer = QuesSerializers(data=request.data)
+    print(serializer.is_valid())
     if serializer.is_valid():
+        print("rwergiunb")
         serializer.save()
 
     return Response(serializer.data)
@@ -55,8 +59,3 @@ def quesUpdate(request, pk):
         serializer.save()
 
     return Response(serializer.data)
-
-
-def addquespage(request):
-    print("xfdxgfxtfyugug")
-    return render(request, "addques.html", {})

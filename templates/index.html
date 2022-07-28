@@ -13,62 +13,72 @@
 </head>
 
 <body>
-    <div class="container my-4">
+    <div class="container my-2">
+
+
+        <!-- logo -->
         <div class="row">
             <img src="https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg"
                 alt="leetcode_logo" height="40vh">
         </div>
+
+        <!-- modal create-->
+
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
             Add Question
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Question</h5>
+                        <h5 class="modal-title" id="createModalLabel">Add Question</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
 
-                        <form class="row g-3" id="form-wrapper">
-                            <div class="col-md-6">
-                                <label for="inputEmail4" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputPassword4" class="form-label">Link</label>
-                                <input type="url" class="form-control" id="queslink">
-                            </div>
-                            <div class="col-12">
-                                <label for="inputAddress" class="form-label">Description</label>
-                                <input type="text" class="form-control" id="description"
-                                    placeholder="how you solved this problem">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputCity" class="form-label">Tag</label>
-                                <input type="text" class="form-control" id="questag">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label">Difficulty</label>
-                                <select id="difficulty" class="form-select">
-                                    <option selected>Choose...</option>
-                                    <option value="EASY">EASY</option>
-                                    <option value="MEDIUM">MEDIUM</option>
-                                    <option value="HARD">HARD</option>
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <label for="inputAddress2" class="form-label">Note</label>
-                                <input type="text" class="form-control" id="note" placeholder="any comments ?">
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary w-100" id="addbtn"
-                                    data-bs-dismiss="modal">Add</button>
-                            </div>
-                        </form>
+                        <!-- modal form -->
+                        <div id="form-wrapper">
+                            <form class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="inputEmail4" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputPassword4" class="form-label">Link</label>
+                                    <input type="url" class="form-control" id="queslink">
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputAddress" class="form-label">Description</label>
+                                    <input type="text" class="form-control" id="description"
+                                        placeholder="how you solved this problem">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputCity" class="form-label">Tag</label>
+                                    <input type="text" class="form-control" id="questag">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label">Difficulty</label>
+                                    <select id="difficulty" class="form-select">
+                                        <option selected>Choose...</option>
+                                        <option value="EASY">EASY</option>
+                                        <option value="MEDIUM">MEDIUM</option>
+                                        <option value="HARD">HARD</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputAddress2" class="form-label">Note</label>
+                                    <input type="text" class="form-control" id="note" placeholder="any comments ?">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100" id="addbtn"
+                                        data-bs-dismiss="modal">Add</button>
+                                </div>
+                            </form>
+
+                        </div>
 
                     </div>
                     <!-- <div class="modal-footer">
@@ -79,8 +89,74 @@
             </div>
         </div>
 
+        <!-- modal update-->
+
+        <!-- Button trigger modal -->
+        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal">
+            Update
+        </button> -->
+
+        <!-- Modal -->
+        <div class="modal  fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateModalLabel">Update Question</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- modal form -->
+                        <div id="updateform-wrapper">
+                            <form class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="inputEmail4" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="updatename">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputPassword4" class="form-label">Link</label>
+                                    <input type="url" class="form-control" id="updatequeslink">
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputAddress" class="form-label">Description</label>
+                                    <input type="text" class="form-control" id="updatedescription"
+                                        placeholder="how you solved this problem">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputCity" class="form-label">Tag</label>
+                                    <input type="text" class="form-control" id="updatequestag">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label">Difficulty</label>
+                                    <select id="updatedifficulty" class="form-select">
+                                        <option selected>Choose...</option>
+                                        <option value="EASY">EASY</option>
+                                        <option value="MEDIUM">MEDIUM</option>
+                                        <option value="HARD">HARD</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputAddress2" class="form-label">Note</label>
+                                    <input type="text" class="form-control" id="updatenote"
+                                        placeholder="any comments ?">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100" id="updatebtn"
+                                        data-bs-dismiss="modal">Update</button>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
+    <!-- table -->
     <div class="table-wrapper w-100 overflow-auto">
         <table class="table">
             <thead>
@@ -94,7 +170,6 @@
                     <th scope="col" class="text-center">Revised On</th>
                     <th scope="col" class="text-center">Revision Count</th>
                     <th scope="col" class="text-center">Note</th>
-
                 </tr>
             </thead>
             <tbody id="tbody" class="text-justify">
@@ -114,6 +189,10 @@
 
 
     <script>
+
+        var updatepk;
+
+        // csrf token
         function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -131,19 +210,21 @@
         }
         const csrftoken = getCookie('csrftoken');
 
+
+        //function to build list of ques in db
         function buildlist() {
             var tbody = document.getElementById('tbody');
-            console.log(tbody);
             var res = ``;
 
             var url = `http://127.0.0.1:8000/api/ques`;
             fetch(url)
                 .then(res => res.json())
                 .then(resdata => {
-                    console.log(resdata);
+                    // console.log(resdata);
                     for (var i = 0; i < resdata.length; i++) {
                         var temp = `<tr>
-                                <th scope="row">${i + 1}</th>
+                                <th scope="row">${i + 1}<button type="button" class="btn btn-primary" onclick="updateques_filldata(${resdata[i].id})" data-bs-toggle="modal" data-bs-target="#updateModal" >
+                                    Update</button></th>
                                 <td>${resdata[i].name}</td>
                                 <td><a href="${resdata[i].link}" target="_blank" >${resdata[i].link}</a></td>
                                 <td>${resdata[i].difficulty}</td>
@@ -158,11 +239,15 @@
                     }
                     tbody.innerHTML = res;
                 })
+
         }
         buildlist();
 
+        //function to add ques in db and list
         function addquestion(e) {
             e.preventDefault();
+            console.log("btn clicked");
+
 
             var bodydata = {
                 'name': document.getElementById('name').value,
@@ -180,21 +265,84 @@
                 },
                 body: JSON.stringify(bodydata)
             }
-            // console.log(JSON.stringify(bodydata));
 
             var url = `http://127.0.0.1:8000/api/create`
             fetch(url, data)
                 .then(res => {
-                    // document.getElementById('form-wrapper').reset();
-                    buildlist();
                     console.log(res)
+                    buildlist();
+                });
+
+        }
+        var entryform = document.getElementById('form-wrapper');
+        entryform.addEventListener('submit', addquestion)
+
+
+
+        //updating entry detail
+        function updateques_filldata(pk) {
+            console.log("btn clicked update", pk);
+
+            var url = `http://127.0.0.1:8000/api/ques/${pk}`;
+
+            fetch(url)
+                .then(res => res.json())
+                .then(resdata => {
+                    console.log(resdata);
+                    document.getElementById('updatename').value = resdata.name
+                    document.getElementById('updatequeslink').value = resdata.link
+                    document.getElementById('updatedescription').value = resdata.description
+                    document.getElementById('updatequestag').value = resdata.tag
+                    document.getElementById('updatedifficulty').value = resdata.difficulty
+                    document.getElementById('updatenote').value = resdata.note
+                })
+            updatepk = pk;
+        }
+
+
+        function updatequestion(e) {
+            e.preventDefault();
+
+
+            var bodydata = {
+                'name': document.getElementById('updatename').value,
+                'link': document.getElementById('updatequeslink').value,
+                'description': document.getElementById('updatedescription').value,
+                'tag': document.getElementById('updatequestag').value,
+                'difficulty': document.getElementById('updatedifficulty').value,
+                'note': document.getElementById('updatenote').value,
+            }
+            console.log("form update btn clicked");
+
+            console.log(bodydata);
+            console.log("pk", updatepk);
+
+            var data = {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify(bodydata)
+            }
+
+
+            var url = `http://127.0.0.1:8000/api/update/${updatepk}`
+            fetch(url, data)
+                .then(res => {
+                    console.log(res)
+                    buildlist();
                 });
 
         }
 
+        var updateform = document.getElementById('updateform-wrapper');
+        updateform.addEventListener('submit', updatequestion)
 
-        var form = document.getElementById('form-wrapper');
-        form.addEventListener('submit', addquestion)
+        // var updatebtn = document.getElementById('updatebtn');
+        // updatebtn.addEventListener('click', updatequestion)
+
+
 
     </script>
 </body>
