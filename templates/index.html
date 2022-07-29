@@ -1,3 +1,5 @@
+{% include 'navbar.html' %}
+
 <!doctype html>
 <html lang="en">
 
@@ -14,13 +16,6 @@
 
 <body>
     <div class="container my-2">
-
-
-        <!-- logo -->
-        <div class="row">
-            <img src="https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg"
-                alt="leetcode_logo" height="40vh">
-        </div>
 
         <!-- modal create-->
 
@@ -135,11 +130,18 @@
                                         <option value="HARD">HARD</option>
                                     </select>
                                 </div>
-                                <div class="col-12">
+
+                                <div class="col-6">
                                     <label for="inputAddress2" class="form-label">Note</label>
                                     <input type="text" class="form-control" id="updatenote"
                                         placeholder="any comments ?">
                                 </div>
+
+                                <div class="col-md-6">
+                                    <label for="inputCity" class="form-label">Revision Count</label>
+                                    <input type="text" class="form-control" id="updatecount">
+                                </div>
+
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary w-100" id="updatebtn"
                                         data-bs-dismiss="modal">Update</button>
@@ -295,6 +297,7 @@
                     document.getElementById('updatequestag').value = resdata.tag
                     document.getElementById('updatedifficulty').value = resdata.difficulty
                     document.getElementById('updatenote').value = resdata.note
+                    document.getElementById('updatecount').value = resdata.revision_count
                 })
             updatepk = pk;
         }
@@ -311,6 +314,7 @@
                 'tag': document.getElementById('updatequestag').value,
                 'difficulty': document.getElementById('updatedifficulty').value,
                 'note': document.getElementById('updatenote').value,
+                'revision_count': document.getElementById('updatecount').value,
             }
             console.log("form update btn clicked");
 

@@ -4,7 +4,18 @@ from rest_framework import serializers
 from .models import *
 
 
-class QuesSerializers(serializers.ModelSerializer):
+class QuesSerializersGET(serializers.ModelSerializer):
+    date_solved = serializers.DateTimeField(format="%d-%b-%y")
+    date_revised = serializers.DateTimeField(format="%d-%b-%y")
+
+    # print("fegrnkjfnkn")
+
+    class Meta:
+        model = Questions
+        fields = "__all__"
+
+
+class QuesSerializersPOST(serializers.ModelSerializer):
     # date_solved = serializers.DateTimeField(format="%d-%b-%y")
     # date_revised = serializers.DateTimeField(format="%d-%b-%y")
 
