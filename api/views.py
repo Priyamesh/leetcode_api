@@ -1,3 +1,4 @@
+from email.mime import application
 from multiprocessing import context
 from django.shortcuts import render, HttpResponse, redirect
 from rest_framework.decorators import api_view
@@ -6,6 +7,8 @@ from .serializers import *
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -23,14 +26,10 @@ def loginpage(request):
             login(request, user)
             return redirect("home")
         else:
+            messages.info(request, "username or password is incorrect")
             return render(request, "login.html", context)
 
     return render(request, "login.html", context)
-
-
-@login_required
-def home(request):
-    return render(request, "index.html", {})
 
 
 def logoutpage(request):
@@ -38,6 +37,30 @@ def logoutpage(request):
     return redirect("home")
 
 
+def registerpage(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get("username")
+            print("user is ", username)
+
+            messages.success(request, "Profile created for " + username)
+            return redirect("/login")
+            # loginpage(request)
+
+    context = {"form": form}
+    return render(request, "register.html", context)
+
+
+@login_required
+def home(request):
+    return render(request, "index.html", {})
+
+
+# API
 @api_view(["GET"])
 def api_endpoints(request):
     api_urls = {
@@ -51,7 +74,7 @@ def api_endpoints(request):
 
 @api_view(["GET"])
 def ques_list(request):
-    ques = Questions.objects.all()
+    ques = Questions.objects.filter(user=request.user)
     serializer = QuesSerializersGET(ques, many=True)
     return Response(serializer.data)
 
@@ -65,13 +88,17 @@ def quesDetail(request, pk):
 
 @api_view(["POST"])
 def quesCreate(request):
-    print(request.data)
-    print("entered in create view")
+    # print(request.data)
     serializer = QuesSerializersPOST(data=request.data)
-    print(serializer.is_valid())
     if serializer.is_valid():
-        print("rwergiunb")
-        serializer.save()
+        ques = serializer.save()
+        ques.user = request.user
+        ques.save()
+
+        # print(name)
+        # print(type(name))
+        # ques = Questions.objects.filter(name=name).first()
+        # print(ques.link)
 
     return Response(serializer.data)
 

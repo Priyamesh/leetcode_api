@@ -217,6 +217,7 @@
         function buildlist() {
             var tbody = document.getElementById('tbody');
             var res = ``;
+            // console.log("user", request.user);
 
             var url = `http://127.0.0.1:8000/api/ques`;
             fetch(url)
@@ -259,6 +260,7 @@
                 'difficulty': document.getElementById('difficulty').value,
                 'note': document.getElementById('note').value,
             }
+            console.log(bodydata);
             var data = {
                 method: "POST",
                 headers: {
