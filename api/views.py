@@ -45,11 +45,16 @@ def registerpage(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
             print("user is ", username)
 
             messages.success(request, "Profile created for " + username)
-            return redirect("/login")
-            # loginpage(request)
+
+            # user = authenticate(username=username, password=password)
+            # login(request, user)
+            # return render(request, "index.html", {})
+
+            return redirect("home")
 
     context = {"form": form}
     return render(request, "register.html", context)
